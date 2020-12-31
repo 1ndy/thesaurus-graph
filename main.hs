@@ -47,6 +47,6 @@ main = do
     lines <- fmap lines $ readFile "small-thesaurus.csv"
     let wordlists = map (splitOn ",") lines
     let wordgraph = createGraph wordlists
-    --plotDGraphPng wordgraph "/mnt/c/Users/editor/Desktop/thesaurustest"
+
     repl wordgraph
     return ()
