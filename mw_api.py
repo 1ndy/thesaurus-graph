@@ -25,7 +25,10 @@ def get_synonyms_from_json(json_obj):
 
 
 def get_antonyms_from_json(json_obj):
-    ls = json_obj['meta']['ants']
+    try:
+        ls = json_obj['meta']['ants']
+    except KeyError:
+        return []
     ants = list(set([j for i in ls for j in i]))
     ants.sort()
     return ants
