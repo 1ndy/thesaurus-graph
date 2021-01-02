@@ -6,4 +6,4 @@ This project aims to find relationships between words by representing a thesauru
 Here is a visualization of [small-thesaurus.csv](https://github.com/1ndy/thesaurus-graph/blob/master/small-thesaurus.csv).
 ![small-thesaurus.csv](small-thesaurus.png)
 
-Next steps include expanding the thesuaurs to include more words (probably by scraping some website) and adding more search functionality like paths between two words.
+Next steps include expanding the thesuaurs to include more words using the Merriam-Webster Thesuarus API and adding more search functionality like paths between two words.
