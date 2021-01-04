@@ -18,7 +18,10 @@ def make_api_request(word):
     return response.json()[0]
 
 def get_synonyms_from_json(json_obj):
-    ls = json_obj['meta']['syns']
+    try: 
+        ls = json_obj['meta']['syns']
+    except KeyError:
+        return []
     syns = list(set([j for i in ls for j in i]))
     syns.sort()
     return syns
