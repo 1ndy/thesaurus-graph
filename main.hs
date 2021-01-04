@@ -1,5 +1,6 @@
 import Control.Monad
 import System.IO
+import System.Environment
 
 import Data.List
 
@@ -44,7 +45,8 @@ repl graph = do
         >> repl graph
 
 main = do
-    lines <- fmap lines $ readFile "small-thesaurus.csv"
+    fname <- fmap head getArgs
+    lines <- fmap lines $ readFile fname
     let wordlists = map (splitOn ",") lines
     let wordgraph = createGraph wordlists
     repl wordgraph
