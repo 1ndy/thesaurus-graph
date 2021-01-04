@@ -1,5 +1,6 @@
 import json
 import requests
+import sys
 
 try:
     api_key = open('mwapi.key','r').read().strip()
@@ -57,11 +58,14 @@ def get_short_defs_from_json(json_obj):
 
 def get_info(word):
     js = make_api_request(word)
-    syns = get_synonyms_from_json(js)
-    ants = get_antonyms_from_json(js)
-    rels = get_related_words_from_json(js)
-    defs = get_short_defs_from_json(js)
-    return (word, syns, ants, rels, defs)
+    if type(js) is str:
+        return None
+    else:
+        syns = get_synonyms_from_json(js)
+        ants = get_antonyms_from_json(js)
+        rels = get_related_words_from_json(js)
+        defs = get_short_defs_from_json(js)
+        return (word, syns, ants, rels, defs)
 
 def create_csv_entries(info):
     (word, syns, ants, rels, defs) = info
@@ -85,14 +89,26 @@ def write_csvs(csvs):
     
 
 def main():
-    wordfile = open("words.txt")
-    wordlist = wordfile.read().split()
-    wordfile.close()
+    if not len(sys.argv) == 2:
+        print('Usage: {} <list_of_words>'.format(sys.argv[0]))
+        quit()
+        
+    wordlist = []
+    try:
+        wordfile = open(sys.argv[1])
+        wordlist = wordfile.read().split()
+        wordfile.close()
+    except:
+        print('Error reading file')
+        quit()
+
     for word in wordlist:
         print("Downloading:",word)
-        i = get_info(word)
-        csvs = create_csv_entries(i)
-        write_csvs(csvs)
-
+        i = get_info(word.lower())
+        if not i == None:
+            csvs = create_csv_entries(i)
+            write_csvs(csvs)
+        else:
+            print("Error:",word)
 
 main()
