@@ -52,11 +52,9 @@ def repl(graph):
     while not inp == "quit":
         print("query> ", end='')
         inp = input().split(' ')
-        print(inp)
         if inp[0] in graph.nodes():
             if len(inp) == 2:
                 depth = int(inp[1])
-                print("finding all nyms {} away".format(depth))
                 nyms_through_depth(graph, inp[0], depth)
             elif len(inp) == 3:
                 if inp[1] == "->":
