@@ -1,3 +1,4 @@
+--deprecated by main.py
 import Control.Monad
 import System.IO
 import System.Environment
